@@ -1,9 +1,10 @@
 ﻿using namespace std;
 #include <iostream>
-#include "csvstream.h"
+#include "csvstream.h" //refer to requirements
 #include <cmath>
 #include <set>
 
+//Find all the unique words in a given article
 set<string> unique_words(string in) {
 	istringstream source(in);
 	set<string> words;
@@ -13,6 +14,7 @@ set<string> unique_words(string in) {
 	}
 	return words;
 }
+//return the probability (log likelihood) that the given article is of the predicted origin
 double loglikelihood(pair<int, vector<string>> p,
 	map<pair<string, string>, int>& counts,
 	map<string, int>& words,
@@ -34,6 +36,9 @@ double logp(int posts,map<string, int> classes, string Media) {
 	double x = classes[Media];
 	return log(x / (double)posts);
 }
+/* We use these statistical concepts to find the media outlet that fits the given test data the best.
+* This is done through a our log likelihood function and the inputs from our training data
+*/
 pair<string, double> predict2(pair<int,string> posts,
 	map<string, int>& words,
 	map<string, int>& classes,
